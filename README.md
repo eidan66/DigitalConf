@@ -1,54 +1,29 @@
-# React + TypeScript + Vite
+# DigitalConf 2025
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+This project is a website for the DigitalConf 2025, a digital marketing conference. The application is a single-page application (SPA) built using React and aims to provide a smooth user experience with support for multiple languages (Hebrew and English) and a responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+- **Multilingual Support:** The site is fully translated into Hebrew and English, with RTL support for Hebrew.
+- **Registration Form:** A user-friendly registration form for attendees to sign up for the conference.
+- **Event Sections:** Dedicated sections for showcasing speakers, the event agenda, and testimonials.
+- **Responsive Design:** The layout is designed to be visually appealing and functional across various devices.
+- **Dynamic Content:** Content for speakers, agenda, and testimonials is handled through translation files for easy management and localization.
+- **Confirmation Page:** A confirmation page displays registration details and provides options to add the event to a calendar.
+- **Scroll to Top Navigation:** Automatically scrolls to the top of the page when navigating between routes.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React
+- TypeScript
+- React Router DOM (for navigation)
+- Tailwind CSS (for styling utilities)
+- Lucide React (for icons)
+- framer-motion (for animations)
+- Custom Internationalization (i18n) implementation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+[Further instructions on setting up and running the project would go here, e.g., installation steps, running the development server, build instructions.]
