@@ -10,9 +10,8 @@ export interface RegistrationFormData {
 }
 
 export interface RegistrationFormProps {
-  onSubmit: (data: RegistrationFormData, interests: string[]) => Promise<void>;
+  onSubmit: (formData: Omit<RegistrationFormData, 'consent'>, interests: string[]) => Promise<void>;
   isLoading: boolean;
-  error: string;
 }
 
 export const COUNTRIES = [
@@ -24,18 +23,18 @@ export const COUNTRIES = [
 ] as const;
 
 export const INTERESTS = [
-  'Digital Strategy',
-  'Content Marketing',
-  'Social Media Marketing',
-  'PPC & Paid Advertising',
-  'SEO & Organic Growth',
-  'Email Marketing',
-  'Marketing Automation',
-  'Analytics & Data',
-  'Conversion Optimization',
-  'E-commerce Marketing',
-  'B2B Marketing',
-  'Influencer Marketing'
+  { key: 'digitalStrategy', default: 'Digital Strategy' },
+  { key: 'contentMarketing', default: 'Content Marketing' },
+  { key: 'socialMediaMarketing', default: 'Social Media Marketing' },
+  { key: 'ppcPaidAdvertising', default: 'PPC & Paid Advertising' },
+  { key: 'seoOrganicGrowth', default: 'SEO & Organic Growth' },
+  { key: 'emailMarketing', default: 'Email Marketing' },
+  { key: 'marketingAutomation', default: 'Marketing Automation' },
+  { key: 'analyticsData', default: 'Analytics & Data' },
+  { key: 'conversionOptimization', default: 'Conversion Optimization' },
+  { key: 'ecommerceMarketing', default: 'E-commerce Marketing' },
+  { key: 'b2bMarketing', default: 'B2B Marketing' },
+  { key: 'influencerMarketing', default: 'Influencer Marketing' },
 ] as const;
 
 export type Country = typeof COUNTRIES[number];

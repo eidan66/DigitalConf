@@ -26,7 +26,7 @@ interface RegistrationData {
 }
 
 export default function Confirmation() {
-  const { t } = useLanguage();
+  const { t, direction } = useLanguage();
   const navigate = useNavigate();
   const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null);
   const [confirmationImage, setConfirmationImage] = useState('');
@@ -63,11 +63,11 @@ export default function Confirmation() {
 
   const generateCalendarFile = () => {
     const event = {
-      title: 'Digital Marketing Conference 2025',
+      title: t('hero.title'),
       start: '20250720T090000Z',
       end: '20250720T170000Z',
-      description: 'Join industry leaders for the premier digital marketing event of 2025',
-      location: 'Online Event'
+      description: t('hero.joinDescription'),
+      location: t('registration.eventLocation')
     };
 
     const icsContent = [
@@ -97,10 +97,10 @@ export default function Confirmation() {
   const getGoogleCalendarUrl = () => {
     const params = new URLSearchParams({
       action: 'TEMPLATE',
-      text: 'Digital Marketing Conference 2025',
+      text: t('hero.title'),
       dates: '20250720T090000Z/20250720T170000Z',
-      details: 'Join industry leaders for the premier digital marketing event of 2025',
-      location: 'Online Event'
+      details: t('hero.joinDescription'),
+      location: t('registration.eventLocation')
     });
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
   };
@@ -172,7 +172,7 @@ export default function Confirmation() {
             transition={{ delay: 0.4 }}
             className="text-xl text-gray-600 mb-2"
           >
-            Hey {firstName}! {t('confirmation.subtitle')}
+            {t('confirmation.hey')} {firstName}! {t('confirmation.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -192,28 +192,29 @@ export default function Confirmation() {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Registration Details */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
+            className="flex"
           >
-            <Card className="shadow-xl border-0">
+            <Card className="shadow-xl border-0 flex-1">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                  <Ticket className="w-6 h-6 mr-3 text-blue-500" />
-                  Your Registration Details
+                  <Ticket className={`w-6 h-6 ${direction === 'rtl' ? 'ml-3' : 'mr-3'} text-blue-500`} />
+                  {t('confirmation.registrationDetailsTitle')}
                 </h2>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Name</span>
+                    <span className="text-gray-600">{t('confirmation.nameLabel')}</span>
                     <span className="font-semibold">{registrationData.full_name}</span>
                   </div>
                   
                   <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Email</span>
+                    <span className="text-gray-600">{t('confirmation.emailLabel')}</span>
                     <span className="font-semibold">{registrationData.email}</span>
                   </div>
                   
@@ -228,9 +229,9 @@ export default function Confirmation() {
                     <div className="flex items-start gap-3">
                       <Mail className="w-5 h-5 text-blue-500 mt-1" />
                       <div>
-                        <h4 className="font-semibold text-gray-900">Check Your Email</h4>
+                        <h4 className="font-semibold text-gray-900">{t('confirmation.checkEmailTitle')}</h4>
                         <p className="text-sm text-gray-600">
-                          We've sent a confirmation email with your ticket and event details to {registrationData.email}
+                          {t('confirmation.checkEmailDescription')} {registrationData.email}
                         </p>
                       </div>
                     </div>
@@ -245,21 +246,21 @@ export default function Confirmation() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7 }}
-            className="space-y-6"
+            className="space-y-6 flex flex-col"
           >
             {/* Event Details Card */}
-            <Card className="shadow-xl border-0">
+            <Card className="shadow-xl border-0 flex-1">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                  <Calendar className="w-6 h-6 mr-3 text-purple-500" />
-                  Event Details
+                  <Calendar className={`w-6 h-6 ${direction === 'rtl' ? 'ml-3' : 'mr-3'} text-purple-500`} />
+                  {t('confirmation.eventDetailsTitle')}
                 </h2>
                 
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
                     <Clock className="w-5 h-5 text-gray-600" />
                     <div>
-                      <div className="font-semibold">July 20, 2025</div>
+                      <div className="font-semibold">{t('registration.eventDate')}</div>
                       <div className="text-sm text-gray-600">9:00 AM - 5:00 PM (EST)</div>
                     </div>
                   </div>
@@ -267,16 +268,16 @@ export default function Confirmation() {
                   <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
                     <Users className="w-5 h-5 text-gray-600" />
                     <div>
-                      <div className="font-semibold">100% Online Event</div>
-                      <div className="text-sm text-gray-600">Join from anywhere in the world</div>
+                      <div className="font-semibold">{t('registration.eventLocation')}</div>
+                      <div className="text-sm text-gray-600">{t('confirmation.joinAnywhere')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-gold-50 to-gold-100 rounded-lg">
                     <Gift className="w-5 h-5 text-gold-600" />
                     <div>
-                      <div className="font-semibold text-gold-800">Free Event</div>
-                      <div className="text-sm text-gold-700">No payment required</div>
+                      <div className="font-semibold text-gold-800">{t('confirmation.freeEventLabel')}</div>
+                      <div className="text-sm text-gold-700">{t('confirmation.noPayment')}</div>
                     </div>
                   </div>
                 </div>
@@ -297,7 +298,7 @@ export default function Confirmation() {
                     className="w-full justify-start"
                   >
                     <Download className="w-4 h-4 mr-3" />
-                    Download .ics file
+                    {t('confirmation.downloadIcs')}
                   </Button>
                   
                   <Button
@@ -306,7 +307,7 @@ export default function Confirmation() {
                     className="w-full justify-start"
                   >
                     <ExternalLink className="w-4 h-4 mr-3" />
-                    Add to Google Calendar
+                    {t('confirmation.addToGoogleCalendar')}
                   </Button>
                 </div>
                 
@@ -332,22 +333,22 @@ export default function Confirmation() {
         >
           <Card className="shadow-lg border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-4">What's Next?</h3>
+              <h3 className="text-2xl font-bold mb-4">{t('confirmation.whatsNextTitle')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div>
                   <Mail className="w-8 h-8 mx-auto mb-3 text-blue-200" />
-                  <h4 className="font-semibold mb-2">Check Your Email</h4>
-                  <p className="text-sm text-blue-100">Confirmation and event link sent</p>
+                  <h4 className="font-semibold mb-2">{t('confirmation.checkEmailWhatsNextTitle')}</h4>
+                  <p className="text-sm text-blue-100">{t('confirmation.checkEmailWhatsNextDescription')}</p>
                 </div>
                 <div>
                   <Calendar className="w-8 h-8 mx-auto mb-3 text-purple-200" />
-                  <h4 className="font-semibold mb-2">Save the Date</h4>
-                  <p className="text-sm text-purple-100">July 20, 2025 - Mark your calendar</p>
+                  <h4 className="font-semibold mb-2">{t('confirmation.saveDateTitle')}</h4>
+                  <p className="text-sm text-purple-100">{t('confirmation.saveDateDescription')}</p>
                 </div>
                 <div>
                   <Users className="w-8 h-8 mx-auto mb-3 text-pink-200" />
-                  <h4 className="font-semibold mb-2">Get Ready to Network</h4>
-                  <p className="text-sm text-pink-100">Connect with 1000+ professionals</p>
+                  <h4 className="font-semibold mb-2">{t('confirmation.getReadyTitle')}</h4>
+                  <p className="text-sm text-pink-100">{t('confirmation.getReadyDescription')}</p>
                 </div>
               </div>
             </CardContent>

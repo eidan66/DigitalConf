@@ -21,8 +21,8 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [language, setLanguage] = useState<Language>('en');
-  const [direction, setDirection] = useState<'ltr' | 'rtl'>('ltr');
+  const [language, setLanguage] = useState<Language>('he');
+  const [direction, setDirection] = useState<'ltr' | 'rtl'>('rtl');
 
   const switchLanguage = (lang: Language) => {
     setLanguage(lang);
@@ -47,9 +47,8 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     document.documentElement.dir = direction;
     document.documentElement.lang = language;
   }, [direction, language]);
-
   return (
-    <LanguageContext.Provider value={{ language, direction, switchLanguage, t }}>
+    <LanguageContext.Provider value={{ language, direction, switchLanguage, t: t as LanguageContextType['t'] }}>
       {children}
     </LanguageContext.Provider>
   );
